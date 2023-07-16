@@ -7,9 +7,12 @@ public class SubstringDivisibilityPandigital {
     private static final int[] PRIMES = {2, 3, 5, 7, 11, 13, 17};
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string of digits: ");
-        String s = scanner.nextLine();
+        //read input string from command line argument 
+        String s = args[0];
+
+
+        //start time
+        double start_time = System.nanoTime();
         List<String> permutations = new ArrayList<>();
         generatePermutationsHelper(s.toCharArray(), 0, permutations);
         //Print all permutations
@@ -23,9 +26,11 @@ public class SubstringDivisibilityPandigital {
         }
         Integer[] validPermutationsArray = validPermutations.toArray(new Integer[0]);
         Arrays.sort(validPermutationsArray);
-        System.out.println("Valid permutations: ");
+        System.out.println("Valid Permutations:");
         System.out.println(Arrays.toString(validPermutationsArray));
         System.out.println(sum(validPermutationsArray));
+        System.out.printf("Elapsed time: %.6f ms\n", (System.nanoTime() - start_time) / 1e6);
+        
     }
 
 
@@ -52,15 +57,15 @@ public class SubstringDivisibilityPandigital {
     private static boolean isSubstringDivisible(String s) {
         
         int INDEX_TO_CHECK_TILL = Math.min(s.length() - 4, PRIMES.length);
-        System.out.println("INDEX_TO_CHECK_TILL: " + INDEX_TO_CHECK_TILL);  
-        System.out.println("permuted string: " + s);  
+        //System.out.println("INDEX_TO_CHECK_TILL: " + INDEX_TO_CHECK_TILL);  
+        //System.out.println("permuted string: " + s);  
 
 
 
         for (int i = 0; i <= INDEX_TO_CHECK_TILL; i++) {
             int substring = Integer.parseInt(s.substring(i + 1, i + 4));  // 0 :1,2,3 
-            System.out.println("substring: " + substring);
-            System.out.println("substring % PRIMES[i]: " + substring % PRIMES[i]);
+            //System.out.println("substring: " + substring);
+            //System.out.println("substring % PRIMES[i]: " + substring % PRIMES[i]);
             if (substring % PRIMES[i] != 0) {
                 return false;
             }
@@ -74,5 +79,7 @@ public class SubstringDivisibilityPandigital {
             sum += num;
         }
         return sum;
-    }
+    } 
+
+
 }
