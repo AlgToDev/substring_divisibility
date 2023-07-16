@@ -18,17 +18,21 @@ public class SubstringDivisibilityPandigital {
         //Print all permutations
         //System.out.println(permutations);
 
-        List<Integer> validPermutations = new ArrayList<>();
+        List<Long> validPermutations = new ArrayList<>();
         for (String p : permutations) {
             if (p.length() == s.length() && isSubstringDivisible(p)) {
-                validPermutations.add(Integer.parseInt(p));
+                validPermutations.add(Long.parseLong(s)) ;
             }
         }
-        Integer[] validPermutationsArray = validPermutations.toArray(new Integer[0]);
+        Long[] validPermutationsArray = validPermutations.toArray(new Long[0]);
         Arrays.sort(validPermutationsArray);
-        System.out.println("Valid Permutations:");
-        System.out.println(Arrays.toString(validPermutationsArray));
-        System.out.println(sum(validPermutationsArray));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Valid permutations: ");
+        for (long num : validPermutationsArray) {
+            sb.append(num).append("\n");
+        }
+        sb.append("Sum: ").append(sum(validPermutationsArray));
+        System.out.println(sb.toString());
         System.out.printf("Elapsed time: %.6f ms\n", (System.nanoTime() - start_time) / 1e6);
         
     }
@@ -73,9 +77,9 @@ public class SubstringDivisibilityPandigital {
         return true;
     }
 
-    private static long sum(Integer[] arr) {
+    private static long sum(Long[] arr) {
         long sum = 0;
-        for (int num : arr) {
+        for (long num : arr) {
             sum += num;
         }
         return sum;
